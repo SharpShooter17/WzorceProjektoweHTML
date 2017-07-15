@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container flow-text">
+			<div class="row">
+				<h1>Wzorce projektowe</h1>
+				<hr />
+				<p>
+					Wzorce projektowe mo¿na podzieliæ na trzy typy. 
+					Mog¹ to byæ wzorce: kreacyjne, strukturalne i czynnoœciowe.
+					Do najprostszych i najpowszechniejszych wzroców projektowych nale¿¹:
+					<ul class="browser-default">
+						<li>Adapter</li>
+						<li>Dekorator</li>
+						<li>Metoda szablonowa</li>
+						<li>Metoda wytwórcza</li>
+						<li>Fabryka abstrakcyjna</li>
+						<li>Kompozyt</li>
+						<li>Obserwator</li>
+						<li>Strategia</li>
+					</ul>
+					Wzorce projektowe s¹ stworzone tak aby mo¿na by³o wykorzysywaæ to 
+					rozwi¹zanie milion razy ale nigdy dwa razy tak samo.					
+				</p>
+				<h3>Wzorce kreacyjne</h3>
+				<hr />
+				<p>
+					Wzorce te wi¹¿¹ siê z uabstrakcyjnieniem procesu tworzenia obiektów.
+					Klasowy wzorzec kreacyjny wykorzystuje dziedziczenie do zmieniania klasy, 
+					której egzemplarze s¹ tworzone, 
+					podczas gdy obiektowy wzprzec deleguje tworzenie egzemplarzy do innego obiektu.
+				</p>
+				<h4>Do wzorców kreacyjnych nale¿¹:</h4>
+				<ul class="browser-default">
+					<li><a href="Builder.html">Budowniczy</a></li>
+					<li><a href="AbstractFactory.html">Fabryka Abstrakcyjna</a></li>
+					<li><a href="VirtualConstructor.html">Metoda Wytwórcza</a></li>
+					<li><a href="Prototype.html">Prototyp</a></li>
+					<li><a href="Singleton.html">Singleton</a></li>
+				</ul>
+				
+				<h3>Wzorce strukturalne</h3>
+				<hr />
+				<p>
+					Wzorce strukturalne wi¹¿¹ siê ze sk³adaniem klas i obiektów w wiêksze struktury.
+					Klasowe wzorce strukturalne wykorzystuj¹ dziedziczenie do sk³adania interfejsów lub implementacji np.: Adapter.
+					Obiektowe wzorce strukturalne nie wykorzystuj¹ sk³adania interfejsów lub implementacji,
+					a opisuj¹ sposoby sk³adania obiektów w celu uzyskania nowej funkcjonalnoœci. 
+					Przyk³adem mo¿e byæ Kompozyt lub Pe³nomocnik.
+				</p>
+				<h4>Do wzorców strukturalnych nale¿¹:</h4>
+				<ul class="browser-default">
+					<li><a href="Wrapper.html">Adapter</a></li>
+					<li><a href="Decorator.html">Dekorator</a></li>
+					<li><a href="Facade.html">Fasada</a></li>
+					<li><a href="Composite.html">Kompozyt</a></li>
+					<li><a href="Bridge.html">Most</a></li>
+					<li><a href="Proxy.html">Pe³nomocnik</a></li>
+					<li><a href="Flyweight.html">Py³ek</a></li>
+				</ul>			
+				<h3>Wzorce czynnoœciowe</h3>
+				<hr />
+				<p>
+					Wzorce czynnoœciowe dotycz¹ algorytmów i przydzielania zobowi¹zañ obiektom.
+					Charakteryzuj¹ z³o¿one przep³ywy sterowania, które s¹ trudne do przeœledzenia w czasie
+					wykonania programu. 
+				</p>
+				<h4>Do wzorców czynnoœciowych nale¿¹:</h4>
+				<ul class="browser-default">
+					<li><a href="Interpreter.html">Interpreter</a></li>
+					<li><a href="Iterator.html">Iterator</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

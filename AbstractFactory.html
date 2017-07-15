@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Fabryka abstrakcyjna</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Zapewnienie interfejsu umo¿liwiaj¹cego tworzenie rodzin powi¹zanych ze sob¹
+					lub zale¿nych od siebie obiektów bez specyfikacji ich klas konkretnych.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						System powinien byæ niezale¿ny od tego, jak jego produkty s¹ tworzone, 
+						sk³adane i reprezentowane.
+					</li>
+					<li>
+						System powinien byæ konfigurowalny przy u¿yciu jednej z wielu rodzin produktów.
+					</li>
+					<li> 
+						Rodzina zwi¹zanych ze sob¹ obiektów-produktów jest zaprojektowana tak, 
+						by te obiekty by³y u¿ywane razem, a nam zale¿y na zachowaniu tego ograniczenia.
+					</li>
+					<li>
+						Chcemy dostarczyæ bibliotekê klas produktów, ujawniaj¹c jedynie ich interfejsy
+						a nie implementacje.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/AbstractFactory.png" alt="AbstractFactory.png" title="Abstract Factory" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Fabryka abstrakcyjna
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs tworzenia produktów abstrakcyjnych.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Fabryka konkretna
+						<ul class="browser-default">
+							<li>
+								Implementuje operacje tworzenia produktów konkretnych.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Produkt abstrakcyjny
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs dla pewnego rodzaju produktu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Produkt konkretny
+						<ul class="browser-default">
+							<li>
+								Definiuje obiekt bêd¹cy produktem, który ma byæ utworzony przez odpowiedni¹ fabrykê konkretn¹.
+							</li>
+							<li>
+								Implementuje interfejs klasy produkt abstrakcyjny.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								U¿ywa jedynie interfejsów zadeklarowanych przez klasy fabryks abstrakcyjna i produkt abstrakcyjny.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/AbstractCarFactory">https://github.com/SharpShooter17/AbstractCarFactory</a>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>£añcuch Zobowi¹zañ</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Umo¿liwia unikniêcie zwi¹zania wysy³aj¹cego ¿¹danie z odbiorc¹ ¿¹danie przez danie wiêcej ni¿ jednemu obiektowi szansy obs³u¿enia tego ¿¹dania.
+					Tworzy ³añcuch odbieraj¹cych obiektów i przekazuje wzd³u¿ niego ¿¹danie, a¿ jakiœ obiekt je obs³u¿y.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Wiêcej ni¿ jeden obiekt mo¿e obs³u¿yæ ¿¹danie, a obiekt obs³uguj¹cy nie jest znany.
+						Obiekt obs³uguj¹cy powinien byæ ustalony automatycznie. 
+					</li>
+					<li>
+						Chcesz wys³aæ ¿¹danie do jednego z kilku obiektów, nie okreœlaj¹c jawnie odbiorcy.
+					</li>
+					<li> 
+						Zbiór obiektów, które mog¹ obs³u¿yæ ¿¹danie, powinien byæ okreœlony dynamicznie. 
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/chainofresponsibility.png" alt="chainofresponsibility.png" title="£añcuch Zobowi¹zañ" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>	
+						Obs³uga
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs obs³ugi ¿¹dañ.
+							</li>
+							<li>
+								Implementuje odwo³anie do nastêpnika.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Obs³uga Konkretna
+						<ul class="browser-default">
+							<li>
+								Obs³uguje te ¿¹dania, za spe³nienie których odpowiada.
+							</li>
+							<li>
+								Mo¿e mieæ dostêp do swojego nastêpnika.
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="browser-default">
+							<li>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="browser-default">
+							<li>
+							</li>
+							<li>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="browser-default">
+							<li>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

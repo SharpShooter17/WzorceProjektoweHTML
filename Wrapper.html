@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Adapter</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Przekszta³ca interfejs klasy w taki, jakiego klienci oczekuj¹.
+					Dziêki Adapterowi klasy mog¹ wspó³pracowaæ, co bez niego nie by³oby mo¿liwe,
+					poniewa¿ maj¹ nie zgodne interfejsy.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Wykorzystanie istniej¹cej klasy z nie odpowiednim interfejsem. 
+					</li>
+					<li>
+						Utworzenie klasy wielokrotnego u¿ytku wspó³pracuj¹cej z nie powi¹zanymi 
+						ze sob¹ lub nie przewidzianymi klasami, to znaczy z takimi, które niekoniecznie 
+						maj¹ zgodne interfejsy.
+					</li>
+					<li> 
+						Potrzebujesz u¿yæ kilku klas instniej¹cych podklas, ale zaadaptowanie ich interfejsów
+						przez tworzenie ich podklas jest niepraktyczne.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/wrapper.gif" alt="wrapper.gif" title="Wrapper" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Cel
+						<ul class="browser-default">
+							<li>
+								Definiuje specyficzny dla dziedziny interfejs u¿ywany dla Klienta.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Wspó³pracuje z obiektami dostosowanymi do interfejsu Celu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Adaptowany
+						<ul class="browser-default">
+							<li>
+								Definiuje istniej¹cy interfejs, który wymaga zaadaptowania.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Adapter
+						<ul class="browser-default">
+							<li>
+								Adaptuje interfejs Adaptowanego do interfejsu Celu.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://sourcemaking.com/design_patterns/adapter/cpp/1">https://sourcemaking.com/design_patterns/adapter/cpp/1</a>
+			</div>
+		</div>
+	</body>
+</html>

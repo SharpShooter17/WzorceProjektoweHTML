@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Kompozyt</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Sk³adanie obiektów w struktury drzewiaste reprezentuj¹ce hierarchie typu czêœæ-ca³oœæ.
+					Umo¿liwia klientom jednakowe traktowanie pojedyñczych obiektów i z³o¿eñ obiektów.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Chcesz przedstawiæ hierarchie obiektów czêœæ-ca³oœæ.
+					</li>
+					<li>
+						Chcesz by Klienci mogli ignorowaæ ró¿nicê miêdzy z³o¿eniami obiektów a pojedyñczymi obiektami. 
+						Klienci bêd¹ wtedy jednakowo traktowali wszystkie obiekty w strukturze.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/composite.png" alt="composite.png" title="Kompozyt" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Komponent
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs sk³adowych obiektów.
+							</li>
+							<li>
+								Implementuje, tam gdzie to mo¿liwe, domyœlne zachowanie w wypadku interfejsu wspólnego dla wszystkich klas.
+							</li>
+							<li>
+								Definiuje interfejs umo¿liwiaj¹cy dostêp i zarz¹dzanie komponentami-dzieæmi
+							</li>
+							<li>
+								Definiuje interfejs umo¿liwiaj¹cy dostêp do rodzica komponentu w strukturze rekurencyjnej i implementuje go,
+								o ile jest to potrzebne. 
+							</li>
+						</ul>
+					</li>
+					<li>
+						Liœæ
+						<ul class="browser-default">
+							<li>
+								Reprezentuje obiekty bêd¹ce liœæmi w sk³adanej strukturze.
+								Liœæ nie ma dzieci.
+							</li>
+							<li>
+								Definiuje zachowanie obiektów pierwotnych w strukturze.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Kompozyt
+							<ul class="browser-default">
+							<li>
+								Definiuje zachowanie komponentó maj¹cych dzieci.
+							</li>
+							<li>
+								Przechowuje komponenty bêd¹ce dzieæmi.
+							</li>
+							<li>
+								Implementuje operacje z interfejsu Komponentu zwi¹zane z dzieæmi.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Manipuluje obiektami wystêpuj¹cymi w strukturze, wykorzystuj¹c do tego interfejs Komponentu.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://sourcemaking.com/design_patterns/composite/cpp/1">https://sourcemaking.com/design_patterns/composite/cpp/1</a>
+			</div>
+		</div>
+	</body>
+</html>

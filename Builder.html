@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Budowniczy</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Odzielenie konstrukcji obiektów z³o¿onych od ich reprezentacji.
+					Umo¿liwia to powstawanie ró¿nych reprezentacji.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Tworzenie obiektu z³o¿onego powinno byæ niezale¿ne od czêœci 
+						sk³adowych tego obiektu i sposobu ich zestawiania.
+					</li>
+					<li>
+						Proces konstruowania musi uwzglêdniaæ ró¿ne reprezentacje konstruowanego obiektu.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/builder.png" alt="builder.png" title="Builder" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Budowniczy
+						<ul class="browser-default">
+							<li>
+								Okreœla interfejs abstrakcyjny do tworzenia czêœci sk³adowych obiektu produkt
+							</li>
+						</ul>
+					</li>
+					<li>
+						Budowniczy konkretny
+						<ul class="browser-default">
+							<li>
+								Konstruuje i zestawia czêœci produktu poprzez implementowanie interfejsu Budowniczego.
+							</li>
+							<li>
+								definiuje i kontroluje tworzon¹ przez siebie reprezentacjê.
+							</li>
+							<li>
+								zapewnia interfejs do wyszukiwania produktu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Kierownik
+						<ul class="browser-default">
+							<li>
+								Konstruuje obiekt u¿waj¹c interfejsu budowniczego.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Produkt
+						<ul class="browser-default">
+							<li>
+								reprezentuje konstruowany obiekt z³o¿ony. 
+								Klasa konkretnego budowniczego buduje wewnêtrzn¹ reprezentacje produktu i definiuje proces sk³adania go.
+							</li>
+							<li>
+								zawiera klasy definiuj¹ce czêœci sk³adowe. 
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				<h6>Car.h</h6>
+				<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Car</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">enum</span> <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">MOTOR</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">DIESEL,</span> <span style="color: #d0d0d0">PETROL,</span> <span style="color: #d0d0d0">ELECTRIC</span> <span style="color: #d0d0d0">};</span>
+	<span style="color: #6ab825; font-weight: bold">enum</span> <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">COLOR</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">BLACK,</span> <span style="color: #d0d0d0">WHITE,</span> <span style="color: #d0d0d0">BLUE,</span> <span style="color: #d0d0d0">ORANGE,</span> <span style="color: #d0d0d0">GREY,</span> <span style="color: #d0d0d0">GREEN,</span> <span style="color: #d0d0d0">PINK,</span> <span style="color: #d0d0d0">YELLOW</span> <span style="color: #d0d0d0">};</span>
+	<span style="color: #6ab825; font-weight: bold">enum</span> <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">TYPE</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">SEDAN,</span> <span style="color: #d0d0d0">CABRIOLET,</span> <span style="color: #d0d0d0">LIMOUSINE};</span>
+	
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">MOTOR</span> <span style="color: #d0d0d0">motor;</span>
+	<span style="color: #d0d0d0">COLOR</span> <span style="color: #d0d0d0">color;</span>
+	<span style="color: #d0d0d0">TYPE</span> <span style="color: #d0d0d0">type;</span>
+<span style="color: #d0d0d0">public:</span>	
+	<span style="color: #d0d0d0">Car();</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">setMotor</span><span style="color: #d0d0d0">(MOTOR</span> <span style="color: #d0d0d0">motor);</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">setColor</span><span style="color: #d0d0d0">(COLOR</span> <span style="color: #d0d0d0">color);</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">setType</span><span style="color: #d0d0d0">(TYPE</span> <span style="color: #d0d0d0">type);</span>
+	
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">echo</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+</pre></div>
+				<h6>Car.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;Car.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+
+<span style="color: #d0d0d0">Car::Car()</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Car::setMotor(Car::MOTOR</span> <span style="color: #d0d0d0">motor)</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;motor</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">motor;</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Car::setColor(Car::COLOR</span> <span style="color: #d0d0d0">color)</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;color</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">color;</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Car::setType(Car::TYPE</span> <span style="color: #d0d0d0">type)</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;type</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">type;</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Car::echo()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">switch</span> <span style="color: #d0d0d0">(motor)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:MOTOR::DIESEL:</span> 
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Motor: Diesel&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:MOTOR::PETROL</span> <span style="color: #d0d0d0">:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Motor: Petrol&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:MOTOR::ELECTRIC:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Motor: Electric&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>	
+	<span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">switch</span><span style="color: #d0d0d0">(color)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:COLOR::GREEN:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;, Color: green&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:COLOR::BLACK:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;, Color: black&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">switch</span><span style="color: #d0d0d0">(type)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:TYPE::SEDAN:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;, type: sedan&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:TYPE::CABRIOLET:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;, type: cabriolet&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">Car</span>:<span style="color: #d0d0d0">:TYPE::LIMOUSINE:</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;, type: limousine&quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">break</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">std::endl;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+				<h6>CarBuilder.h</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Car.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarBuilder</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+
+<span style="color: #d0d0d0">protected:</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConstructCar()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConstructMotor()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConstrucColor()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConstructType()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getCar()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">};</span>
+</pre></div>
+				<h6>CarBuilderMiniOne.h</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilder.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Car.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarBuilderMiniOne</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">CarBuilder</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">actualCar;</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">CarBuilderMiniOne();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructCar</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructMotor</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstrucColor</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructType</span><span style="color: #d0d0d0">();</span>
+	
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #447fcf">getCar</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+</pre></div>
+				<h6>CarBuilderMiniOne.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilderMiniOne.h&quot;</span>
+
+<span style="color: #d0d0d0">CarBuilderMiniOne::CarBuilderMiniOne()</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #d0d0d0">actualCar(nullptr)</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderMiniOne::ConstructCar()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">Car();</span>
+<span style="color: #d0d0d0">}</span>	
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderMiniOne::ConstructMotor()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setMotor(Car::MOTOR::PETROL);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderMiniOne::ConstrucColor()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setColor(Car::COLOR::GREEN);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderMiniOne::ConstructType()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setType(Car::TYPE::CABRIOLET);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">CarBuilderMiniOne::getCar()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;actualCar;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+<h6>CarBuilderPassat.h</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilder.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Car.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarBuilderPassat</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">CarBuilder</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">actualCar;</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">CarBuilderPassat();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructCar</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructMotor</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstrucColor</span><span style="color: #d0d0d0">();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">ConstructType</span><span style="color: #d0d0d0">();</span>
+	
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #447fcf">getCar</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+</pre></div>
+				<h6>CarBuilderPassat.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilderPassat.h&quot;</span>
+
+<span style="color: #d0d0d0">CarBuilderPassat::CarBuilderPassat()</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #d0d0d0">actualCar(nullptr)</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderPassat::ConstructCar()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">Car();</span>
+<span style="color: #d0d0d0">}</span>	
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderPassat::ConstructMotor()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setMotor(Car::MOTOR::DIESEL);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderPassat::ConstrucColor()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setColor(Car::COLOR::BLACK);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">CarBuilderPassat::ConstructType()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">actualCar-&gt;setType(Car::TYPE::SEDAN);</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">Car</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">CarBuilderPassat::getCar()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;actualCar;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+				<h6>Director.h</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilder.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Director</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">createCar(CarBuilder</span> <span style="color: #d0d0d0">&amp;</span> <span style="color: #d0d0d0">builder);</span>
+<span style="color: #d0d0d0">};</span>
+</pre></div>
+				<h6>Director.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;Director.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Director::createCar(CarBuilder</span> <span style="color: #d0d0d0">&amp;</span> <span style="color: #d0d0d0">builder)</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">builder.ConstructCar();</span>
+	<span style="color: #d0d0d0">builder.ConstructMotor();</span>
+	<span style="color: #d0d0d0">builder.ConstrucColor();</span>
+	<span style="color: #d0d0d0">builder.ConstructType();</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+				<h6>main.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;Director.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilderMiniOne.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;CarBuilderPassat.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Director</span> <span style="color: #d0d0d0">director;</span>
+	<span style="color: #d0d0d0">CarBuilderMiniOne</span> <span style="color: #d0d0d0">miniOne;</span>
+	<span style="color: #d0d0d0">CarBuilderPassat</span> <span style="color: #d0d0d0">passat;</span>
+	<span style="color: #d0d0d0">director.createCar(miniOne);</span>
+	<span style="color: #d0d0d0">director.createCar(passat);</span>
+	
+	<span style="color: #d0d0d0">miniOne.getCar()-&gt;echo();</span>
+	<span style="color: #d0d0d0">passat.getCar()-&gt;echo();</span>
+	
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">miniOne.getCar();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">passat.getCar();</span>
+	
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>			
+			</div>
+		</div>
+	</body>
+</html>

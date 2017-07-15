@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Prototyp</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Specyfikacja rodzaji tworzonych obiektÛw, uøywajπc prototypowego egzemplarza, 
+					a takøe tworzy nowe obiekty, kopiujπc ten prototyp.
+				</p>
+				<h5>Kiedy stosowaÊ</h5>
+				<ul class="browser-default">
+					<li>
+						<b>Tworzony system powinien byÊ niezaleøny od tego, jak jego produkty sπ tworzone,
+						sk≥adane i reprezentowane.</b>
+					</li>
+					<li>
+						Klasy, ktÛrych egzemplarze chcesz tworzyÊ, sπ specyfikowane w czasie wykonywania programu,
+						na przyk≥ad przez dynamiczne ≥adowanie. 
+					</li>
+					<li>
+						Chcesz uniknπÊ budowania hierarchii klas fabryk, ktÛa jest porÛwnywalna z hierarchiπ klas produktÛw.
+					</li>
+					<li>
+						stan obiektÛw klasy moøe przyjmowaÊ tylko jednπ z kilku rÛønych wartoúci. Moøe byÊ wÛwczas wygodniej zainstalowaÊ
+						odpowiedniπ liczbÍ prototypÛw i klonowaÊ je niø rÍcznie tworzyÊ egzemplarze klasy, 
+						za kaødym razem z odpowiednim stanem.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/prototype.png" alt="prototype.png" title="Prototype" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Prototyp
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs klonowania siÍ.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Prototyp Konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje operacjÍ klonowania siÍ.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Tworzy nowy obiekt, proszπc prototyp o sklonowanie siÍ. 
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk≥ad</h5>
+				èrÛd≥o: <a target="_blank" href="https://pl.wikibooks.org/wiki/Kody_%C5%BAr%C3%B3d%C5%82owe/Prototyp_(wzorzec_projektowy)#C.2B.2B">https://pl.wikibooks.org/wiki/Kody_%C5%BAr%C3%B3d%C5%82owe/Prototyp_(wzorzec_projektowy)#C.2B.2B</a>
+				<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;map&gt;</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;string&gt;</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;cstdint&gt;</span>
+
+<span style="color: #6ab825; font-weight: bold">using</span> <span style="color: #6ab825; font-weight: bold">namespace</span> <span style="color: #d0d0d0">std;</span>
+
+<span style="color: #6ab825; font-weight: bold">enum</span> <span style="color: #d0d0d0">RECORD_TYPE_en</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">CAR,</span>
+	<span style="color: #d0d0d0">BIKE,</span>
+	<span style="color: #d0d0d0">PERSON</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #999999; font-style: italic">/**</span>
+<span style="color: #999999; font-style: italic">* Record is the Prototype</span>
+<span style="color: #999999; font-style: italic">*/</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Record</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+
+	<span style="color: #d0d0d0">Record()</span> <span style="color: #d0d0d0">{}</span>
+
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~Record()</span> <span style="color: #d0d0d0">{}</span>
+
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Record*</span> <span style="color: #d0d0d0">Clone()</span> <span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Print()</span> <span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #999999; font-style: italic">/**</span>
+<span style="color: #999999; font-style: italic">* CarRecord is Concrete Prototype</span>
+<span style="color: #999999; font-style: italic">*/</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarRecord</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Record</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">string</span> <span style="color: #d0d0d0">m_oStrCarName;</span>
+
+	<span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">m_ui32ID;</span>
+
+<span style="color: #d0d0d0">public:</span>
+
+	<span style="color: #d0d0d0">CarRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">string&amp;</span> <span style="color: #d0d0d0">_oStrCarName,</span> <span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">_ui32ID)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record(),</span> <span style="color: #d0d0d0">m_oStrCarName(_oStrCarName),</span>
+		<span style="color: #d0d0d0">m_ui32ID(_ui32ID)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">CarRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">CarRecord&amp;</span> <span style="color: #d0d0d0">_oCarRecord)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">m_oStrCarName</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oCarRecord.m_oStrCarName;</span>
+		<span style="color: #d0d0d0">m_ui32ID</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oCarRecord.m_ui32ID;</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">~CarRecord()</span> <span style="color: #d0d0d0">{}</span>
+
+	<span style="color: #d0d0d0">CarRecord*</span> <span style="color: #d0d0d0">Clone()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">CarRecord(*</span><span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">);</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Print()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Car Record&quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Name  : &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_oStrCarName</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Number: &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_ui32ID</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+
+<span style="color: #999999; font-style: italic">/**</span>
+<span style="color: #999999; font-style: italic">* BikeRecord is the Concrete Prototype</span>
+<span style="color: #999999; font-style: italic">*/</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">BikeRecord</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Record</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">string</span> <span style="color: #d0d0d0">m_oStrBikeName;</span>
+
+	<span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">m_ui32ID;</span>
+
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">BikeRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">string&amp;</span> <span style="color: #d0d0d0">_oStrBikeName,</span> <span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">_ui32ID)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record(),</span> <span style="color: #d0d0d0">m_oStrBikeName(_oStrBikeName),</span>
+		<span style="color: #d0d0d0">m_ui32ID(_ui32ID)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">BikeRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">BikeRecord&amp;</span> <span style="color: #d0d0d0">_oBikeRecord)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">m_oStrBikeName</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oBikeRecord.m_oStrBikeName;</span>
+		<span style="color: #d0d0d0">m_ui32ID</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oBikeRecord.m_ui32ID;</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">~BikeRecord()</span> <span style="color: #d0d0d0">{}</span>
+
+	<span style="color: #d0d0d0">BikeRecord*</span> <span style="color: #d0d0d0">Clone()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">BikeRecord(*</span><span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">);</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Print()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Bike Record&quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Name  : &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_oStrBikeName</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Number: &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_ui32ID</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+
+<span style="color: #999999; font-style: italic">/**</span>
+<span style="color: #999999; font-style: italic">* PersonRecord is the Concrete Prototype</span>
+<span style="color: #999999; font-style: italic">*/</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">PersonRecord</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Record</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">string</span> <span style="color: #d0d0d0">m_oStrPersonName;</span>
+
+	<span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">m_ui32Age;</span>
+
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">PersonRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">string&amp;</span> <span style="color: #d0d0d0">_oStrPersonName,</span> <span style="color: #6ab825; font-weight: bold">uint32_t</span> <span style="color: #d0d0d0">_ui32Age)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record(),</span> <span style="color: #d0d0d0">m_oStrPersonName(_oStrPersonName),</span>
+		<span style="color: #d0d0d0">m_ui32Age(_ui32Age)</span>
+	<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">PersonRecord(</span><span style="color: #6ab825; font-weight: bold">const</span> <span style="color: #d0d0d0">PersonRecord&amp;</span> <span style="color: #d0d0d0">_oPersonRecord)</span>
+		<span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">Record()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">m_oStrPersonName</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oPersonRecord.m_oStrPersonName;</span>
+		<span style="color: #d0d0d0">m_ui32Age</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">_oPersonRecord.m_ui32Age;</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">~PersonRecord()</span> <span style="color: #d0d0d0">{}</span>
+
+	<span style="color: #d0d0d0">Record*</span> <span style="color: #d0d0d0">Clone()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">PersonRecord(*</span><span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">);</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Print()</span> <span style="color: #6ab825; font-weight: bold">const</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Person Record&quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Name : &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_oStrPersonName</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span>
+			<span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Age  : &quot;</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">m_ui32Age</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #d0d0d0">endl;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+
+<span style="color: #999999; font-style: italic">/**</span>
+<span style="color: #999999; font-style: italic">* RecordFactory is the client</span>
+<span style="color: #999999; font-style: italic">*/</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">RecordFactory</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">map&lt;RECORD_TYPE_en,</span> <span style="color: #d0d0d0">Record*</span> <span style="color: #d0d0d0">&gt;</span> <span style="color: #d0d0d0">m_oMapRecordReference;</span>
+
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">RecordFactory()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">m_oMapRecordReference[CAR]</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">CarRecord(</span><span style="color: #ed9d13">&quot;Ferrari&quot;</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">5050</span><span style="color: #d0d0d0">);</span>
+		<span style="color: #d0d0d0">m_oMapRecordReference[BIKE]</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">BikeRecord(</span><span style="color: #ed9d13">&quot;Yamaha&quot;</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">2525</span><span style="color: #d0d0d0">);</span>
+		<span style="color: #d0d0d0">m_oMapRecordReference[PERSON]</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">PersonRecord(</span><span style="color: #ed9d13">&quot;Tom&quot;</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">25</span><span style="color: #d0d0d0">);</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">~RecordFactory()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">m_oMapRecordReference[CAR];</span>
+		<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">m_oMapRecordReference[BIKE];</span>
+		<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">m_oMapRecordReference[PERSON];</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #d0d0d0">Record*</span> <span style="color: #d0d0d0">CreateRecord(RECORD_TYPE_en</span> <span style="color: #d0d0d0">enType)</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">m_oMapRecordReference[enType]-&gt;Clone();</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">RecordFactory*</span> <span style="color: #d0d0d0">poRecordFactory</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">RecordFactory();</span>
+
+	<span style="color: #d0d0d0">Record*</span> <span style="color: #d0d0d0">poRecord;</span>
+	<span style="color: #d0d0d0">poRecord</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">poRecordFactory-&gt;CreateRecord(CAR);</span>
+	<span style="color: #d0d0d0">poRecord-&gt;Print();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">poRecord;</span>
+
+	<span style="color: #d0d0d0">poRecord</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">poRecordFactory-&gt;CreateRecord(BIKE);</span>
+	<span style="color: #d0d0d0">poRecord-&gt;Print();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">poRecord;</span>
+
+	<span style="color: #d0d0d0">poRecord</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">poRecordFactory-&gt;CreateRecord(PERSON);</span>
+	<span style="color: #d0d0d0">poRecord-&gt;Print();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">poRecord;</span>
+
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">poRecordFactory;</span>
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+
+			</div>
+		</div>
+	</body>
+</html>

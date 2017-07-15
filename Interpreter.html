@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Interpreter</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten definiuje reprezentacjê dla gramatyki zadanego jêzyka,
+					a tak¿e interpreter, który wykorzystuje tê reprezentacjê do interpretowania
+					zdañ w tym jêzyku.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Gramatyka jest prosta.
+					</li>
+					<li>
+						Efektywnoœæ nie jest najwa¿niejsza.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/interpreter.png" alt="interpreter.png" title="Interpreter" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Wyra¿enie Abstrakcyjne
+						<ul class="browser-default">
+							<li>
+								Deklaruje operacjê abstrakcyjn¹ Interpretuj, wspóln¹ dla wszystkich wêz³ów w drzewie sk³adni abstrakcyjnej.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Wyra¿enie Koñcowe
+						<ul class="browser-default">
+							<li>
+								Implementuje operacjê Interpretuj zwi¹zan¹ z symbolami koñcowymi w gramatyce.
+							</li>
+							<li>
+								Dla ka¿dego symbolu koñcowego w zdaniu jest wymagany jeden egzemplarz. 
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="browser-default">
+							Wyra¿enie Pomocnicze
+							<li>
+								Jedna taka klasa wymagana jest dla ka¿dej regó³y z gramatyki.
+							</li>
+							<li>
+								Utrzymuje zmienne egzemplarzowe typu Wyra¿enie Abstrakcyjne dla ka¿dego z symboli.
+							</li>
+							<li>
+								Implementuje operacjê Interpretuj dla symboli pomocniczych w gramatyce.
+								Zwykle operacjê te wywo³uje siê rekurencyjnie na zmiennych reprezentuj¹cych.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Kontekst
+						<ul class="browser-default">
+							<li>
+								Zawiera globalne informacje dla interpretera.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Buduje drzewko sk³adni abstrakcyjnej reprezentuj¹ce okreœlone zdanie w jêzyku 
+								definiowanym przez gramatykê.
+								Drzewko sk³adni abstrakcyjnej sk³ada siê z egzemplarzy klas Wyra¿enie Pomocniczei Wyra¿enie Koñcowe.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

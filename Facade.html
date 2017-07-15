@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Fasada</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Zapewnia jednolity interfejs dla podsystemu zawieraj¹cego wiele interfejsów. 
+					Definiuje interfejs wy¿szego poziomu, co u³atwia korzystanie z podsystemu.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Zapewnienie prostego interfejsu do z³o¿onego systemu. 
+					</li>
+					<li>
+						Oddzielenie podsystemu od klientów i innych podsystemów.
+					</li>
+					<li> 
+						U³o¿enie podsystemów warstwami. 
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/facade.png" alt="facade.png" title="Fasada" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Fasada
+						<ul class="browser-default">
+							<li>
+								Wie, jakie klasy podsystemu s¹ odpowiedzialne za spe³nienie ¿¹dania. 
+							</li>
+							<li>
+								Przekazuje ¿¹dania klienta do odpowiednich obiektów podsystemu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klasy podsystemu
+						<ul class="browser-default">
+							<li>
+								Implementuj¹ funkcje podsystemu.
+							</li>
+							<li>
+								Wykonuj¹ pracê przydzielon¹ przez obiekt klasy Fasady.
+							</li>
+							<li>
+								Nic nie wiedz¹ o fasadzie, nie przechowuj¹ ¿adnych odwo³añ do niej.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://sourcemaking.com/design_patterns/facade/cpp/1">https://sourcemaking.com/design_patterns/facade/cpp/1</a>
+			</div>
+		</div>
+	</body>
+</html>

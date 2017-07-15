@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Metoda Wytwórcza</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Okreœlenie interfejsu do tworzenia obiektów, 
+					lecz umo¿liwia podklasom decydowanie o tym, której klasy ma to byæ obiekt.
+					Dziêki Metodzie Wytwórczej klasy mog¹ zdaæ siêna podklasy w kwestii tworzenia egzemplarzy.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Klasa nie mo¿e przewidzieæ, jakich klas obiekty musi tworzyæ.
+					</li>
+					<li>
+						Klasa chce, by to jej podklasy specyfikowa³y tworzone przez ni¹ obiekty.
+					</li>
+					<li> 
+						Klasy przekazuj¹ odpowiedzialnoœæ jednej z kilku podklas pomocniczych,
+						a Ty chcesz tylko w jednym miejscu ustaliæ, która z podklas pomocniczych jest ich delegatem.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/VirtualConstructor.png" alt=".png" title="" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Produkt
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs obiektów tworzonych przez metodê wytwórcz¹.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Produkt konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje interfejs z klasy Produkt.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Twórca
+						<ul class="browser-default">
+							<li>
+								Deklaruje metodê wytwórcz¹, która przekazuje obiekt typu Produkt.
+								Twórca mo¿e tak¿e definiowaæ domyœln¹ implementacjêmetody wytwórczej, 
+								która przekazuje pewien domyœlny obiekt klasy Produkt Konkretny.
+							</li>
+							<li>
+								Mo¿e wywo³aæ metodê wytwórcz, aby utworzyæ obiekt klasy Produkt.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Twórca Konkretny
+						<ul class="browser-default">
+							<li>
+								Przedefiniowuje metodê wytwórcz¹, ¿eby przekazywa³a obiekt klasy Produkt Konkretny.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				<h6>main.cpp</h6>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+
+<span style="color: #6ab825; font-weight: bold">enum</span> <span style="color: #6ab825; font-weight: bold">class</span>  <span style="color: #447fcf; text-decoration: underline">ChocolateType</span><span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">MILK,</span> <span style="color: #d0d0d0">DARK,</span> <span style="color: #d0d0d0">WITH_NUTS</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Chocolate</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">protected:</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getChocolate()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~Chocolate()</span> <span style="color: #d0d0d0">{};</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">MilkChocolate</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getChocolate()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Add milk.. &quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">DarkChocolate</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getChocolate()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Add cocoa.. &quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">NutsChocolate</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getChocolate()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Add nuts.. &quot;</span><span style="color: #d0d0d0">;</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ChocolateFactory</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">produceChocolate(ChocolateType</span> <span style="color: #d0d0d0">type)</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ChocolateFactory()</span> <span style="color: #d0d0d0">{};</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">WedelFactory</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">ChocolateFactory</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">produceChocolate(ChocolateType</span> <span style="color: #d0d0d0">type)</span> 
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">switch</span> <span style="color: #d0d0d0">(type)</span>
+		<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">ChocolateType</span>:<span style="color: #d0d0d0">:MILK:</span>
+			<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">MilkChocolate();</span>
+		<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">ChocolateType</span>:<span style="color: #d0d0d0">:DARK:</span>
+			<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">DarkChocolate();</span>
+		<span style="color: #6ab825; font-weight: bold">case</span> <span style="color: #d0d0d0">ChocolateType</span>:<span style="color: #d0d0d0">:WITH_NUTS:</span>
+			<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">NutsChocolate();</span>
+		<span style="color: #d0d0d0">default:</span>
+			<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">nullptr;</span>
+		<span style="color: #d0d0d0">}</span>
+	<span style="color: #d0d0d0">}</span>
+
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~WedelFactory()</span> <span style="color: #d0d0d0">{}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">ChocolateFactory</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">factory</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">WedelFactory();</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">milk</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">factory-&gt;produceChocolate(ChocolateType::MILK);</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">dark</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">factory-&gt;produceChocolate(ChocolateType::DARK);</span>
+	<span style="color: #d0d0d0">Chocolate</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">nuts</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">factory-&gt;produceChocolate(ChocolateType::WITH_NUTS);</span>
+
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">milk-&gt;getChocolate();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">dark-&gt;getChocolate();</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">nuts-&gt;getChocolate();</span>
+
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+
+			</div>
+		</div>
+	</body>
+</html>

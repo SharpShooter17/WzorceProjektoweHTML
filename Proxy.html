@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Pe³nomocnik</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Zapewnienie substytutu lub reprezentanta innego obiektu w celu sterowania dostêpu do niego.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						<b>Pe³nomocnik ma zastosowanie zawsze wtedy, kiedy potrzeba bardziej uniwersalnego lub 
+						bardziej wyrafinowanego odwo³ania do obiektu ni¿ zwyk³y wskaŸnik.</b>
+					</li>
+					<li>
+						<b>Pe³nomocnik zdalny</b> jest lokalnym reprezentantem obiektu znajduj¹cego siê w przestrzeni adresowej.
+					</li>
+					<li> 
+						<b>Pe³nomocnik wirtualny</b> tworzy kosztowne obiekty na ¿¹danie.
+					</li>
+					<li>
+						<b>Pe³nomocnik ochraniaj¹cy</b> kontroluje dostêp do oryginalnego obiektu. 
+						Jest przydatny wtedy kiedy chcemy mieæ ró¿ne prawa dostêpu.
+					</li>
+					<li>
+						<b>Sprytne odwo³anie</b> zastêpuje zwyk³y wskaŸnik, wykonuj¹c dodatkowe akcje przy dostêpie do obiektu. Np.:
+						<ul class="browser-default">
+							<li>
+								Zliczanie liczby odwo³añ do rzeczywistego obiektu.
+							</li>
+							<li>
+								£adowanie trwa³ych obiektów do pamiêci przy pierwszym odwo³aniu siê do nich.
+							</li>
+							<li>
+								Sprawdzanie czy rzeczywisty obiekt jest zablokowany przed u¿yciem go.
+								Chodzi o upewnienie czy ¿aden inny obiekt nie mo¿e go u¿yæ.
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/proxy.png" alt="proxy.png" title="Pe³nomocnik" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Pe³nomocnik
+						<ul class="browser-default">
+							<li>
+								Przechowuje odwo³anie, które umo¿liwia mu dostêp do prawdziwego przedmiotu.
+							</li>
+							<li>
+								Zapewnia taki sam interfejs jak interfejs Przedmiotu. 
+								Tak, ¿e Pe³nomocnik mo¿e byæ zast¹piony przez Przedmiot.
+							</li>
+							<li>
+								Kontroluje dostêp do prawdziwego przedmiotu i mo¿e byæ odpowiedzialny za tworzenie tego przedmiotu oraz usuwanie. 
+							</li>
+							<li>
+								Inne obowi¹zki: 
+								<ul class="browser-default">
+									<li>
+										<u>Pe³nomocnik zdalny</u> jest odpowiedzialny za kodowanie ¿¹dañ i ich argumentów oraz za 
+										wysy³anie zakodowanych ¿¹dañ do rzeczywistych przedmiotów w innej przestrzeni adresowej.
+									</li>
+									<li>
+										<u>Pe³nomocnik wirtualny</u> mo¿e przechowywaæ w pamiêci podrêcznej dodatkowe informacje o rzeczywistym
+										przedmiocie.
+									</li>
+									<li>
+										<u>Pe³nomocnik ochraniaj¹cy</u> sprawdza, czy wywo³uj¹cy ma zezwolenie na dostêp, 
+										wymagany do spe³nienia danego ¿¹dania.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						Przedmiot
+						<ul class="browser-default">
+							<li>
+								Definiuje wspólny interfejs dla Prawdziwego Przedmiotu i Pe³nomocnika, 
+								tak ¿eby Pe³nomocnik móg³ byæ u¿ywany tam gdzie jest oczekiwany Prawdziwy Przedmiot.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Prawdziwy Przedmiot
+						<ul class="browser-default">
+							<li>
+								Definiuje rzeczywisty obiekt reprezentowany przez Pe³nomocnika.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://sourcemaking.com/design_patterns/proxy/cpp/3">https://sourcemaking.com/design_patterns/proxy/cpp/3</a>
+			</div>
+		</div>
+	</body>
+</html>

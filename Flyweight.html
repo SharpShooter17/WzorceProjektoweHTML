@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Py³ek</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wspó³dzielenie obiektów w celu efektywnej obs³ugi wielkiej liczby drobnych obiektów.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Aplikacja u¿ywa wielkiej liczby obiektów.
+					</li>
+					<li>
+						Koszty zapamiêtania s¹ wysokie ze wzglêdu na sam¹ liczbê obiektów.
+					</li>
+					<li> 
+						Wiêkszoœæ stanu obiektów mo¿e byæ przeniesiona na zewn¹trz.
+					</li>
+					<li>
+						Po usuniêciu stanu zewnêtrznego wiele grup obiektów mo¿na 
+						zast¹piæ stosunkowo nie wielk¹ liczb¹ wspó³dzielonych obiektów.
+					</li>
+					<li>
+						To¿samoœæ obiektów nie jest dla aplikacji istotna. Poniewa¿ py³ki mog¹ byæ wspó³dzielone,
+						sprawdzanie to¿samoœci dla wartoœci <i>true</i> w przypadku koncepcyjnie ró¿nych obiektów.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/flyweight.gif" alt="flyweight" title="Py³ek" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Py³ek
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs, poprzez który py³ki mog¹ otrzymywaæ stan zewnêtrzny i dzia³aæ zgodnie z nim.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Py³ek konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje interfejs Py³ku i dodaje pamiêæ do przechowania stanu wewnêtrznego.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Niewspó³dzielony Py³ek Konkretny
+						<ul class="browser-default">
+							<li>
+								Nie wszystkie podklasy Py³ku musz¹ byæ wspó³dzielone.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Fabryka Py³ków
+						<ul class="browser-default">
+							<li>
+								Tworzy obiekty klasy Py³ek i zarz¹dza nimi.
+							</li>
+							<li>
+								Zapewnia w³aœciwe wspó³dzielenie py³ków.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Utrzymuje odwo³ania do Py³ków.
+							</li>
+							<li>
+								Wylicza lub przechowuje stan zewnêtrzny Py³ków.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

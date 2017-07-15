@@ -1,0 +1,6 @@
+ul.browser-default {
+  padding-left: 40px;
+}
+ul.browser-default li {
+  list-style-type: inherit;
+}

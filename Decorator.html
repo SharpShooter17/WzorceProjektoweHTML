@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Dekorator</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Dynamiczne do³¹czanie do obiektów dodatkowe zobowi¹zania. 
+					Dekorator zapewnia elastyczn¹ alternatywê dla tworzenia podklas w celu rozszerzenia funkcjonalnoœci.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						¯eby dynmicznie i w przezroczysty sposób dodaæ zobowi¹zania do pojedyñczych obiektów.
+					</li>
+					<li>	
+						W wypadku zobowi¹zañ, które maj¹ byæ cofniête.
+					</li>
+					<li> 
+						Gdy rozszerzanie przez definiowanie podklas jest nie praktyczne.
+						Czasami jest mo¿liwych mnóstwo niezale¿nych rozszerzeñ, które przy
+						próbie uwzglêdnienia ka¿dej z ich kombinacji prowadz¹ do gwa³townego wzrstu
+						liczby klas. Definicja klasy mo¿e te¿ byæ ukryta lub inaczej niedostêpna, jeœli
+						chodzi o tworzenie podklas.
+					</li>
+					<li>
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/decorator.png" alt="decorator.png" title="Dekorator" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Komponent
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs obiektów, do których mo¿na dynamicznie do³¹czaæ zobowi¹zania.
+							</li>
+						</ul>
+					</li>
+					<li>
+						KomponentKonkretny
+						<ul class="browser-default">
+							<li>
+								Definiuje obiekt, do którego mo¿na do³¹czaæ dodatkowe zobowi¹zania.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Dekorator
+						<ul class="browser-default">
+							<li>
+								Zarz¹dza odwo³aniem do obiektu Komponent i definiuje interfejs 
+								dopasowany do interfejsu Komponentu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						DekoratorKonkretny
+						<ul class="browser-default">
+							<li>
+								Dodaje zobowi¹zania do komponentu.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				<h6>main.cpp</h6>
+				<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteComponentA.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteDecoratorA.h&quot;</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteDecoratorB.h&quot;</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Clear component\n&quot;</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">comp</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">Component();</span>
+	<span style="color: #d0d0d0">comp-&gt;operation();</span>
+
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Add decorator A\n&quot;</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">comp</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">ConcreteDecoratorA(comp);</span>
+	<span style="color: #d0d0d0">comp-&gt;operation();</span>
+
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Add decorator B\n&quot;</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">comp</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">ConcreteDecoratorB(comp);</span>
+	<span style="color: #d0d0d0">comp-&gt;operation();</span>
+
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">comp;</span>
+
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Component</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Component();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~Component();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">operation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #cd2828; font-weight: bold">#include &quot;Component.h&quot;</span>
+
+
+
+<span style="color: #d0d0d0">Component::Component()</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+
+<span style="color: #d0d0d0">Component::~Component()</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Component::operation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Clear operation\n&quot;</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Component.h&quot;</span>
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Decorator</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Component</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Decorator(Component</span> <span style="color: #d0d0d0">*);</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~Decorator();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">operation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">_component;</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #cd2828; font-weight: bold">#include &quot;Decorator.h&quot;</span>
+
+
+
+<span style="color: #d0d0d0">Decorator::Decorator(Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">component)</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #d0d0d0">_component(component)</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #d0d0d0">Decorator::~Decorator()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(_component</span> <span style="color: #d0d0d0">!=</span> <span style="color: #d0d0d0">nullptr)</span>
+		<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">_component;</span>
+
+	<span style="color: #d0d0d0">_component</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">nullptr;</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">Decorator::operation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">_component-&gt;operation();</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Decorator operation.\n&quot;</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Decorator.h&quot;</span>
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ConcreteDecoratorA</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Decorator</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">ConcreteDecoratorA(Component</span> <span style="color: #d0d0d0">*);</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ConcreteDecoratorA();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">operation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">decoratorOperation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteDecoratorA.h&quot;</span>
+
+
+<span style="color: #d0d0d0">ConcreteDecoratorA::ConcreteDecoratorA(Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">component)</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #d0d0d0">Decorator(component)</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #d0d0d0">ConcreteDecoratorA::~ConcreteDecoratorA()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Decorator::~Decorator();</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConcreteDecoratorA::operation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Decorator::operation();</span>
+	<span style="color: #d0d0d0">decoratorOperation();</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConcreteDecoratorA::decoratorOperation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Decorator A operation\n&quot;</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Decorator.h&quot;</span>
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ConcreteDecoratorB</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Decorator</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">ConcreteDecoratorB(Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">component);</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ConcreteDecoratorB();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">operation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">decoratorOperation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteDecoratorB.h&quot;</span>
+
+
+
+<span style="color: #d0d0d0">ConcreteDecoratorB::ConcreteDecoratorB(Component</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">component)</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #d0d0d0">Decorator(component)</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #d0d0d0">ConcreteDecoratorB::~ConcreteDecoratorB()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Decorator::~Decorator();</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConcreteDecoratorB::operation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Decorator::operation();</span>
+	<span style="color: #d0d0d0">decoratorOperation();</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConcreteDecoratorB::decoratorOperation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Decorator B operation\n&quot;</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+<span style="color: #cd2828; font-weight: bold">#pragma once</span>
+<span style="color: #cd2828; font-weight: bold">#include &quot;Component.h&quot;</span>
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ConcreteComponentA</span> <span style="color: #d0d0d0">:</span>
+	<span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Component</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">ConcreteComponentA();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ConcreteComponentA();</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">operation</span><span style="color: #d0d0d0">();</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #cd2828; font-weight: bold">#include &quot;ConcreteComponentA.h&quot;</span>
+
+
+
+<span style="color: #d0d0d0">ConcreteComponentA::ConcreteComponentA()</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+
+<span style="color: #d0d0d0">ConcreteComponentA::~ConcreteComponentA()</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">}</span>
+
+<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">ConcreteComponentA::operation()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Concrete Component A operation\n&quot;</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+
+			</div>
+		</div>
+	</body>
+</html>

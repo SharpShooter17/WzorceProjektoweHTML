@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Singleton</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Gwarantuje, ¿e klasa ma tylko jeden egzemplarz,
+					i zapewnia globalny dostêp do niego.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Klasa musi mieæ jeden egzemplarz, dostêpny dla jej klientów.
+					</li>
+					<li>
+						Powinno byæ mo¿liwe rozbudowywanie tego jedynego egzemplarza przez definiowanie podklas, 
+						a klienci powinni móc u¿ywaæ rozszerzonego egzemplarza bez modyfikowania swojego kodu.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/singleton.png" alt="singleton.png" title="Singleton" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Singleton
+						<ul class="browser-default">
+							<li>
+								Definiuje operacjê Egzemplarz, umorzliwiaj¹c klientom uzyskiwanie dostêpu do tego unikatowergo egzemplarza.
+							</li>
+							<li>
+								Mo¿e byæ odpowiedzialny za tworzenie swojego jedynego egzemplarza.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				<h6>singleton.cpp</h6>
+				<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CSingleton</span>
+<span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">private:</span>
+    <span style="color: #d0d0d0">CSingleton()</span> 
+	<span style="color: #d0d0d0">{</span> 
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Initialize\n&quot;</span><span style="color: #d0d0d0">;</span> 
+	<span style="color: #d0d0d0">}</span>
+	
+	<span style="color: #6ab825; font-weight: bold">static</span> <span style="color: #d0d0d0">CSingleton</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">instance;</span>
+<span style="color: #d0d0d0">public:</span>
+    <span style="color: #6ab825; font-weight: bold">static</span> <span style="color: #d0d0d0">CSingleton</span> <span style="color: #d0d0d0">*</span> <span style="color: #447fcf">getInstance</span><span style="color: #d0d0d0">()</span>
+    <span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(</span> <span style="color: #d0d0d0">instance</span> <span style="color: #d0d0d0">==</span> <span style="color: #d0d0d0">nullptr</span> <span style="color: #d0d0d0">)</span>
+		<span style="color: #d0d0d0">{</span>
+			<span style="color: #d0d0d0">instance</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">CSingleton();</span>
+		<span style="color: #d0d0d0">}</span>
+        
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">instance;</span>
+    <span style="color: #d0d0d0">}</span>
+    
+    <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #447fcf">method</span><span style="color: #d0d0d0">()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Hello, World!\n&quot;</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #d0d0d0">CSingleton</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">CSingleton::instance</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">nullptr;</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">CSingleton::getInstance()-&gt;method();</span>
+	<span style="color: #d0d0d0">CSingleton::getInstance()-&gt;method();</span>
+	
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+
+			</div>
+		</div>
+	</body>
+</html>

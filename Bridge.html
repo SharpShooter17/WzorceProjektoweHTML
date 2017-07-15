@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Most</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Oddzielenie abstrakcji od jej implementacji, 
+					tak aby mog³y siê zmieniaæ niezale¿niej jedna od drugiej.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Chcesz unikn¹æ sta³ego powi¹zania abstrakcji z jej implementacj¹.
+					</li>
+					<li>
+						Zarówno abstrakcje, jak i ich implementacje powinny dawaæ siê rozbudowywaæ przez tworzenie podklas. 
+					</li>
+					<li> 
+						Zmiany w implementacji abstrakcji nie powinny mieæ ¿adnego wp³ywi na klientów,
+						tzn. ich programy nie powinny podlegaæ ponownej kompilacji. 
+					</li>
+					<li>
+						Chcesz ca³kowicie ukryæ implementacje abstrakcji przed klientem.
+					</li>
+					<li>
+						Chcesz, ¿eby wiele obiektów wspó³dzieli³o implementacje i ¿eby ten fakt by³ ukryty przed klientem. 
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/bridge.png" alt="bridge.png" title="Most" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Abstrakcja
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs abstrakcji.
+							</li>
+							<li>
+								Zarz¹dza odwo³aniem do obiektu implementacja.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Rozwiniêta Abstrakcja
+						<ul class="browser-default">
+							<li>	
+								Rozszerza interfejs zdefiniowany przez abstrakcjê.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Implementacja
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs klas implementuj¹cych, który nie musi dok³adnie odpowiadaæ 
+								interfejsowi Abstrakcji. 
+							</li>
+						</ul>
+					</li>
+					<li>
+						Implementacja Konkretna
+						<ul class="browser-default">
+							<li>
+								Implementuje interfejs klasy Implementacja i definiuje implementacje konkretn¹.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				<!-- HTML generated using hilite.me --><div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cd2828; font-weight: bold">#include &lt;iostream&gt;</span>
+<span style="color: #cd2828; font-weight: bold">#include &lt;exception&gt;</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ImplVehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">enter()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">startMotor()</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ImplVehicle()</span> <span style="color: #d0d0d0">{};</span>
+<span style="color: #d0d0d0">protected:</span>
+	<span style="color: #d0d0d0">ImplVehicle()</span> <span style="color: #d0d0d0">{};</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ImpMotocycle</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">ImplVehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">ImpMotocycle()</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">ImplVehicle()</span> <span style="color: #d0d0d0">{}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">enter()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Get on the motor\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">startMotor()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Brum brum\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">makeWheele()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Make a stunt: wheele xD\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ImpMotocycle()</span> <span style="color: #d0d0d0">{}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">ImpCar</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">ImplVehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">ImpCar()</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">ImplVehicle()</span> <span style="color: #d0d0d0">{}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">enter()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Get into the car\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">startMotor()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Wrum wrum\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">horn()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">std::cout</span> <span style="color: #d0d0d0">&lt;&lt;</span> <span style="color: #ed9d13">&quot;Ti tit!\n&quot;</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #d0d0d0">~ImpCar()</span> <span style="color: #d0d0d0">{};</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Vehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Vehicle()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">setImpVehicle(</span> <span style="color: #d0d0d0">nullptr</span> <span style="color: #d0d0d0">);</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">enter()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">_ImpVehicle-&gt;enter();</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">virtual</span> <span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">startMotor()</span> <span style="color: #d0d0d0">{</span> <span style="color: #d0d0d0">_ImpVehicle-&gt;startMotor();</span> <span style="color: #d0d0d0">}</span>
+	<span style="color: #d0d0d0">~Vehicle()</span> 
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(_ImpVehicle</span> <span style="color: #d0d0d0">!=</span> <span style="color: #d0d0d0">nullptr)</span>
+			<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">_ImpVehicle;</span> 
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">protected:</span>
+	<span style="color: #d0d0d0">ImplVehicle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">getImpVehicle()</span> 
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(_ImpVehicle</span> <span style="color: #d0d0d0">==</span> <span style="color: #d0d0d0">nullptr)</span>
+			<span style="color: #6ab825; font-weight: bold">throw</span> <span style="color: #d0d0d0">std::exception();</span>
+		<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">_ImpVehicle;</span> 
+	<span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">setImpVehicle(ImplVehicle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">imp)</span> <span style="color: #d0d0d0">{</span> <span style="color: #6ab825; font-weight: bold">this</span><span style="color: #d0d0d0">-&gt;_ImpVehicle</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">imp;</span> <span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">private:</span>
+	<span style="color: #d0d0d0">ImplVehicle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">_ImpVehicle;</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Motocycle</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Vehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Motocycle()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">setImpVehicle(</span><span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">ImpMotocycle);</span>
+	<span style="color: #d0d0d0">}</span>
+	
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">makeWheele()</span> 
+	<span style="color: #d0d0d0">{</span>  
+		<span style="color: #d0d0d0">ImpMotocycle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">imp</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">dynamic_cast</span><span style="color: #d0d0d0">&lt;ImpMotocycle*&gt;(Vehicle::getImpVehicle());</span>
+		<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(imp</span> <span style="color: #d0d0d0">!=</span> <span style="color: #d0d0d0">nullptr)</span>
+			<span style="color: #d0d0d0">imp-&gt;makeWheele();</span>
+		<span style="color: #6ab825; font-weight: bold">else</span> 
+			<span style="color: #6ab825; font-weight: bold">throw</span> <span style="color: #d0d0d0">std::exception();</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Car</span> <span style="color: #d0d0d0">:</span> <span style="color: #6ab825; font-weight: bold">public</span> <span style="color: #d0d0d0">Vehicle</span> <span style="color: #d0d0d0">{</span>
+<span style="color: #d0d0d0">public:</span>
+	<span style="color: #d0d0d0">Car()</span>
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">setImpVehicle(</span><span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">ImpCar());</span>
+	<span style="color: #d0d0d0">}</span>
+	<span style="color: #6ab825; font-weight: bold">void</span> <span style="color: #d0d0d0">horn()</span> 
+	<span style="color: #d0d0d0">{</span>
+		<span style="color: #d0d0d0">ImpCar</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">imp</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">dynamic_cast</span><span style="color: #d0d0d0">&lt;ImpCar*&gt;(Vehicle::getImpVehicle());</span>
+		<span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">(imp</span> <span style="color: #d0d0d0">!=</span> <span style="color: #d0d0d0">nullptr)</span>
+			<span style="color: #d0d0d0">imp-&gt;horn();</span>
+		<span style="color: #6ab825; font-weight: bold">else</span>
+			<span style="color: #6ab825; font-weight: bold">throw</span> <span style="color: #d0d0d0">std::exception();</span>
+	<span style="color: #d0d0d0">}</span>
+<span style="color: #d0d0d0">};</span>
+
+<span style="color: #6ab825; font-weight: bold">int</span> <span style="color: #447fcf">main</span><span style="color: #d0d0d0">()</span>
+<span style="color: #d0d0d0">{</span>
+	<span style="color: #d0d0d0">Vehicle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">motocycle</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">Motocycle();</span>
+	<span style="color: #d0d0d0">Vehicle</span> <span style="color: #d0d0d0">*</span> <span style="color: #d0d0d0">car</span> <span style="color: #d0d0d0">=</span> <span style="color: #6ab825; font-weight: bold">new</span> <span style="color: #d0d0d0">Car();</span>
+
+	<span style="color: #d0d0d0">motocycle-&gt;enter();</span>
+	<span style="color: #d0d0d0">motocycle-&gt;startMotor();</span>
+
+	<span style="color: #d0d0d0">car-&gt;enter();</span>
+	<span style="color: #d0d0d0">car-&gt;startMotor();</span>
+
+	<span style="color: #6ab825; font-weight: bold">dynamic_cast</span><span style="color: #d0d0d0">&lt;Motocycle*&gt;(motocycle)-&gt;makeWheele();</span>
+	<span style="color: #6ab825; font-weight: bold">dynamic_cast</span><span style="color: #d0d0d0">&lt;Car*&gt;(car)-&gt;horn();</span>
+
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">car;</span>
+	<span style="color: #6ab825; font-weight: bold">delete</span> <span style="color: #d0d0d0">motocycle;</span>
+
+	<span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #3677a9">0</span><span style="color: #d0d0d0">;</span>
+<span style="color: #d0d0d0">}</span>
+</pre></div>
+
+			</div>
+		</div>
+	</body>
+</html>
