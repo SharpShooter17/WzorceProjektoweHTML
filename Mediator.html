@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Mediator</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec definiuje obiekt kapsu³kuj¹cy informacje o tym, jak obiekty wspó³dzia³aj¹.
+					Mediator przyczynia siê do rozluŸnienia powi¹zañ miêdzy obiektami,
+					gdy¿ sprawia, ¿e nie odwo³ujê siê one do siebie wprost. 
+					Umo¿liwia to te¿ oddzielene zmienianie ich sposobu porozumiewania siê.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Zbiór obiektów porozumiewa siê w dobrze zdefiniowany, lecz skomplikowany sposób.
+					</li>
+					<li>
+						Ponowne u¿ycie obiektu jest trudne poniewa¿ odwo³ujê siê on do wielu innych obiektów.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/mediator.png" alt="mediator.png" title="Mediator" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Mediator
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs porozumiewania siê z obiektami Wspó³pracownik.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Mediator Konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje wspólne zachowanie przez koordynowanie wspó³pracy obiektu Wspó³pracownik.
+							</li>
+							<li>
+								Zna i koordynuje swoich wspó³pracowników.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klasy Wspó³pracowników
+						<ul class="browser-default">
+							<li>
+								Ka¿da klasa Wspó³pracownik zna swój obiekt Mediator.
+							</li>
+							<li>
+								Ka¿dy wspó³pracownik porozumiewa siê ze swoim mediatorem zawsze wtedy, 
+								kiedy zwykle bezpoœrednio porozumiewa³by siê z innym wspó³pracownikiem.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>
