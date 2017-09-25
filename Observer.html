@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Obserwator</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Worzec ten okreœla zale¿noœæ jeden-do-wiele miêdzy obiektami.
+					Gdy jeden obiekt zmienia sta, wszystkie obiekty odeñ zale¿ne s¹ o tym automatycznie powiadamiane i aktualizowane.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Gdy jakaœ abstrakcja ma dwa aspekty, jeden zale¿y od drugiego.
+						Kapsu³kowanie tych aspektów w oddzielnych obiektach umo¿liwia niezale¿ne zmienianie i u¿ywanie tych obiektów.
+					</li>
+					<li>
+						Zmiana jednego obiektu wymaga zmiany innych i nie wiadomo ile obiektów trzeba zmieniæ.
+					</li>
+					<li> 
+						Obiekt powinien byæ w stanie powiadamiaæ inne obiekty, nie przyjmuj¹c ¿adnych za³o¿eñ co do tego, co te obiekty reprezentuj¹, innymi s³owy, gdy chcesz unikn¹æ œcis³ego powi¹zania tych obiektów.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/observer.gif" alt="observer.gif" title="Obserwator" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Obserwowany(obiekt)
+						<ul class="browser-default">
+							<li>
+								Zna swoich obserwatorów. Mo¿e go obserwowaæ dowolna liczba Obserwatorów.
+							</li>
+							<li>
+								Zapewnia interfejs do³¹czania i od³¹czania Obserwatorów.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Obserwator
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs uaktualniania dla obiektów, które powinny byæ powiadamiane o zmianach, jakie zasz³y w obserwowanym.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Obserwowany konkretny
+						<ul class="browser-default">
+							<li>
+								Przechowuje stan, który interesuje obiekty Obserwator konkretny.
+							</li>
+							<li>
+								Gdy zmienia siê jego stan, wysy³a powiadomienia do swoich Obserwatorów.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Obserwator konkretny
+						<ul class="browser-default">
+							<li>
+								Utrzymuje odwo³anie do obiektu Obserwowany konkretny.
+							</li>
+							<li>
+								Przechowuje stan, który powinien byæ spójny ze stanem obserwowanego. 
+							</li>
+							<li>
+								Implementuje interfejs Obserwatora s³u¿¹cy do uaktualniania, ¿eby zachowaæ spójnoœæ swojego stanu ze stanem obserwowanego.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

@@ -14,54 +14,63 @@
 		
 		<div class="container">
 			<div class="row flow-text">
-				<h4>Metoda wytwórcza</h4>
+				<h4>Iterator</h4>
 				<hr />
 				<h5>Przeznaczenie</h5>
 				<p>
+					Zapewnienie sekwencyjnego dostêpu do elementów obiektu zagregowanego bez ujawniania jego reprezentacji wewnêtrznej.
 				</p>
 				<h5>Kiedy stosowaæ</h5>
 				<ul class="browser-default">
 					<li>
+						Chcesz uzyskaæ dostêp do zawartoœci obiektu-agregatu bez ujawniania jego struktury wewnêtrznej.
 					</li>
 					<li>
+						Chcesz wielokrotnie przechodziæ przez obiekty-agregaty.
 					</li>
 					<li> 
+						Chcesz zapewniæ jednakowy interfejs do przechodzenia ró¿nych struktur zagregowanych.
 					</li>
 					<li>
 					</li>
 				</ul>
 				<h5>Struktura</h5>
-				<img src="/images/.png" alt=".png" title="" />
+				<img src="/images/iterator.png" alt="iterator.png" title="Iterator" />
 				<h5>Uczestnicy</h5>
 				<ul class="browser-default">
 					<li>
+						Iterator
 						<ul class="browser-default">
 							<li>
+								Definiuje interfejs dostêpu do elementów i przechodzenia ich.
 							</li>
 						</ul>
 					</li>
 					<li>
+						Iterator konketny
 						<ul class="browser-default">
 							<li>
+								Implementuje interfejs Iteratora.
+							</li>
+							<li>
+								Pamiêta bie¿¹c¹ pozycjê osi¹gniêt¹ przy przechodzeniu agregatu.
 							</li>
 						</ul>
 					</li>
 					<li>
+						Agregat
 						<ul class="browser-default">
 							<li>
+								Definiuje interfejs tworzenia obiektów-iteratorów.
 							</li>
 						</ul>
 					</li>
 					<li>
+						Agregat konketny
 						<ul class="browser-default">
 							<li>
+								Implementuje interfejs tworzenia Iteratoratak, by przekazywa³ egzemplarz odpowiedniego Iteratora konketnego.
 							</li>
-							<li>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<ul class="browser-default">
 							<li>
 							</li>
 						</ul>

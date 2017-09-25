@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Metoda Szablonowa</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten definiuje szkielet algorytmu jako operacjê, odk³adaj¹c definicjeê niektórych kroków algorytmów do podklas.
+					umo¿liwia podklasom przedefiniowanie pewnych kroków algorytmu bez zmieny jego struktury.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						W celu jednorazowego zaimplementowania sta³ej czêsci algorytmu i pozostawienia podklasom zaimplementowania zachowania, które mo¿e siê zmieniaæ.
+					</li>
+					<li>
+						Gdy wspólne dla podklas zachowanie powinno byæ okreœlone i umieszczone we wspólnje klasie w celu unikniêcia powielenia kodu.
+						Jest to dobry przyk³ad refaktoryzajcji w celu uogólnienia. Najpierw znajdujemy ró¿nicê w istniej¹cym kodzie, a nastêpnie wydzielamy te ró¿nicê w postaci nowych operacji.
+						Na koniec zastêpujemy ten ró¿ni¹cy siê kod metod¹ szablonow¹, któa wywo³uje jedn¹ z nowych funkcji.
+					</li>
+					<li> 
+						Do kontrolowania rozszerzania klas. Mo¿na zdefiniowaæ metodê szablonow¹, która w wybranych miejscach wywo³uje operacjê-punkty zaczepienia, umo¿liwiaj¹c tym samym rozszerzanie klas tylko w tych miejscach.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/TemplateMethod.png" alt="TemplateMethod.png" title="Metoda Szablonowa" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Klasa abstrakcyjna
+						<ul class="browser-default">
+							<li>
+								Definiuje abstrakcyjne <b>operacje pierwotne</b>, przedefiniowywane przez podklasy w celu zaimplementowania kroków algorytmu.
+							</li>
+							<li>
+								Implementuje metodê szablonow¹ definiuj¹c¹ szkielet algorytmu.
+								Metoda szablonowa wywo³uje operacje pierwotne jak równie¿ operacje zdefiniowane w Klasie abstrakcyjnej lub operacje innych obiektów.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klasa konkretna
+						<ul class="browser-default">
+							<li>
+								Implementuje operacje pierwotne w celu wykonania specyficznych dla podklasy kroków algorytmu.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>
