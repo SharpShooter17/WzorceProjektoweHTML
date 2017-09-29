@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Polecenie</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten kapsu³kuje ¿¹dania w postaci obiektu, co umo¿liwia parametryzowanie klientów ró¿nymi ¿¹daniami, 
+					kolejkowanie ¿¹dañ lub zapisywanie ich w dziennikach, a tak¿e u³atwia implementacjê anulowanych operacji.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Sparametryzowanie obiektów wykonywan¹ akcj¹. 
+					</li>
+					<li>
+						Specyfikowanie, kolejkowanie i spe³nianie ¿¹dañ w ró¿nym czasie. 
+						Obiekt klasy Polecenie mo¿e miec okres ¿ycia zupe³nie niezale¿ny od pierwotnego ¿¹dania.
+					</li>
+					<li> 
+						Uwzglêdnienie anulowania wprowadzanych zmian. Operacja Wykonaj z Polecenia mo¿e w tym samym poleceniu zapamiêtaæ stan potrzebny do cofniêcia skutków jej wykonania.
+					</li>
+					<li>
+						Umo¿liwienie wpisywania zmian do dziennika, tak by mo¿na je by³o ponownie wykonaæ, gdy dojdzie do awarii systemu.
+					</li>
+					<li>
+						Stworzenie systemu wokó³ operacji wysokiego poziomu, zbudowanych z operacji pierwotnych.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/command.png" alt="command.png" title="Komenda" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Polecenie
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfej do wykonywania operacji.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Polecenie konkretne
+						<ul class="browser-default">
+							<li>
+								Definiuje powi¹zanie miêdzy obiektem Odbiorca i akcja.
+							</li>
+							<li>
+								Implementuje operacjê Wykonaj przez wywo³anie odpowiednich operacji Odbiorcy.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Klient
+						<ul class="browser-default">
+							<li>
+								Tworzy obiekt klasy Polecenie konkretne i ustala jego odbiorcê.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Wywo³uj¹cy
+						<ul class="browser-default">
+							<li>
+								Prosi polecenie o spe³nienie ¿¹dania.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Odbiorca
+						<ul class="browser-default">
+							<li>
+								Wie, jak wykonaæ operacjê zwi¹zane ze spe³nienie ¿¹dania.
+								Odbiorc¹ mo¿e byæ dowolna klasa.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

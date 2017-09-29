@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Odwiedzaj¹cy</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten okreœla operacjê, która ma byæ wykowywana na elementach struktury obiektowej. 
+					Umo¿liwia definiowanie nowej operacji bez modyfikowania klas elementów, na których ona dzia³a.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Struktura obiektowa zawiera wiele klas obiektów z róznymi interfejsami, a Ty chcesz na tych obiektach wykonywaæ operacjê, któe zale¿¹ od innych klas konkretnych.
+					</li>
+					<li>
+						Wiele ró¿nych i niepowi¹zanych ze sob¹ operacji musi byæ wykonanych na obiektach w pewnej strukturze obiektowej, a Ty chcesz unikn¹æ "zanieczyszczania" klas tych obiektów tymi operacjami.
+						Wzorzec Odwiedzaj¹cy umo¿liwia trzymanie powi¹zanych ze sob¹ operacji razem przez zdefiniowanie ich w jednej klasie. 
+						Gdy dana struktura obiektowa jest wspó³dzielona przez wiele aplikacji, wzorzec u³¹twia umieszczanie operacji w tych aplikacjach, które ich potrzebuj¹.
+					</li>
+					<li> 
+						Klasy definiuj¹ce strukture obiektow¹ rzadko siê zmieniaj¹, ale Ty czesto chcesz definiowaæ nowe operacje na tej strukturze.
+						Zmienianie klas ze struktury obiektowej wymaga przedefiniowywania interfejsu wszystkich odwiedzaj¹cych, co jest potencjalnie kosztowne.
+						Jeœli klasy z struktury obiektowej czêsto siê zmieniaj¹, to prawdopodobnie lepiej jest zdefiniowaæ te operacje w tych klasach.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/visitor.png" alt="visitor.png" title="Odwiedzaj¹cy" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Odwiedzaj¹cy 
+						<ul class="browser-default">
+							<li>
+								Deklaruje operacjê OdwiedŸ dla ka¿dej klasy Elementów konkretnych w strukturze obiektowej.
+								Nazwa i sygnatura operacji okreœlaj¹ klasê, która wysy³a ¿¹danie OdwiedŸ do Odwiedzaj¹cego.
+								Umo¿liwia to odwiedzaj¹cemu ustalenie klasy konkretnej odwiedzanego elementu. 
+								Odwiedzaj¹cy mo¿e potem uzyskaæ bezpoœredni dostêp do elementu poprzez jego interfejs.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Odwiedzaj¹cy konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje ka¿d¹ z operacji zadeklarowanych przez Odwiedzaj¹cego.
+								Ka¿da operacja implementuje fragment algorytmu zdefiniowanego dla odpowiedniej klasy obiektu w strukturze.
+								Odwiedzaj¹cy konkretny zapewnia kontekst dla algorytmu i przechowuje jego stan lokalny.
+								Stan ten czêsto kumuluje wyniki uzyskiwane podczas przehodzenia struktury.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Element(Wêze³)
+						<ul class="browser-default">
+							<li>
+								Definiuje operacjê Przyjmij, otrzymuj¹c¹ odwiedzaj¹cego jako argument.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Element konkretny
+						<ul class="browser-default">
+							<li>
+								Implementuje operacjê przyjmij, która otrzymuje odwiedzaj¹cego jako argument.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Struktura obiektowa
+						<ul class="browser-default">
+							<li>
+								Mo¿e posiadaæ swoje elementy.
+							</li>
+							<li>
+								Mo¿e zapewniæ wysokopoziomowy interfejs umo¿liwiaj¹cy odwiedzaj¹cemu odwiedzenie elementów.
+							</li>
+							<li>
+								Mo¿e byæ kompozytem lub kolekcj¹, tak¹ jak lista czy zbiór.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

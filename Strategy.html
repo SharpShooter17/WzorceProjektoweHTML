@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Strategia</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten definiuje rodzinê algorytmów, kapsu³kuje ka¿dy z nich i umo¿liwia ich wymianê.
+					Sprawia te¿, ¿e mo¿liwe staje siê zmienianie algorytmu niezale¿nie od u¿ywaj¹cych go klientów.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<p>Istnieje wiele algorytmów dziel¹cych strumieñ znaków tekstu na wiersze.
+				Zakodowanie takich algorytmów na sztywno w u¿ywanych klasach nie jest po¿¹dane z kilku powodów.</p>
+				<ul class="browser-default">
+					<li>
+						Klienci wymagaj¹cy dzielenia tekstu na wiersze staj¹ siê bardziej skomplikowani, jeœli zawieraj¹ kod podzia³u na wiersze.
+						Staj¹ siê wiêksi i trudniejsi do utrzymania, a ju¿ szczególnie wtedy, kiedy dopuszczaj¹ kilka algorytmów podzia³u na wiersze.
+					</li>
+					<li>
+						Ró¿ne algorytmy s¹ odpowiednie w ró¿nych sytuacjach. 
+						Nie chcemy uwzglêdniaæ wielu algorytmów podzia³u na wiersze, jeœli nie u¿ywamy ich wszystkich.
+					</li>
+					<li> 
+						Trudno jest dodawaæ nowe algorytmy i zmieniaæ istniej¹ce, gdy podzia³ na wiersze jest integraln¹ czêœci¹ klienta.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/strategy.png" alt="strategy.png" title="Strategia" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Strategia
+						<ul class="browser-default">
+							<li>
+								Deklaruje interfejs wspólny dla wszystkich obs³ugowanych algorytmów.
+								Kontekst wykorzystuje ten interfejs do wykonywania algorytmu zdefiniowanego przez Strategiê konkretn¹.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Strategia konkretna
+						<ul class="browser-default">
+							<li>
+								Implementuje algorytm, wykorzystuj¹cy interfejs z klasy Strategia.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Kontekst
+						<ul class="browser-default">
+							<li>
+								Jest konfigurowalny za pomoc¹ obieky Strategia konkretna.
+							</li>
+							<li>
+								Utrzymuje odwo³anie do obieku Strategia.
+							</li>
+							<li>
+								Mo¿e definiowaæ interfejs umo¿liwiaj¹cy Strategii uzyskanie dostêpu do jego danych.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

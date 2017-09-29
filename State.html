@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Stan</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten umo¿liwia obiektowi zmianê zachowania, gdy zmienia siê jego stan wewnêtrzny.
+					Dziêki temu obiekt zdaje siê zmieniæ wówczas swoj¹ klasê.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Zachowanie obiektu zale¿y od jego stanu, a obiekt ten musi zmieniaæ swoje zachowanie w czasie wykonywania programu w zale¿noœci od stanu.
+					</li>
+					<li>
+						Operacje zawieraj¹ du¿e, wieloczêœciowe instrukcje warunkowe, które zale¿¹ od stanu obiektu.
+						Stan jest zwykle reprezentowany przez jedn¹ lub wiêcej sta³ych wyliczeniiowych. 
+						Czêsto kilka operacji zawiera instrukcje warunkowe o tej samej strukturze. 
+						Wzorzec Stan przenosi ka¿de rozga³êzienie warunkowe do oddzielnej klasy.
+						Dziêki temu mo¿liwe jest traktowanie stanu obiektu jako odrêbnego obiektu, który mo¿e siê zmieniaæ niezale¿nie od innych obiektów.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/state.png" alt="state.png" title="Stan" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Kontekst
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs dla klientów. 
+							</li>
+							<li>
+								Utrzymuje egzemplarz podklasy Stanu konkretnego, definiuj¹cy bie¿¹cy stan.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Stan 
+						<ul class="browser-default">
+							<li>
+								Definiuje interfejs do kapsu³kowania zachowania zwi¹zanego z okreœlonym stanem Kontekstu.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Podklasy Stanu Konkretnego
+						<ul class="browser-default">
+							<li>
+								Ka¿da podklasa implementuje zachowanie zwi¹zane ze stanem konkretnym.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>

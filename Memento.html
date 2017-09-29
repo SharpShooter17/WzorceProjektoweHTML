@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen, projection"/>
+		<link type="text/css" rel="stylesheet" href="/assets/css/myStyle.css" />
+		<title>Wzorce projektowe</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../..//assets/js/materialize.min.js"></script>
+		
+		<div class="container">
+			<div class="row flow-text">
+				<h4>Pami¹tka</h4>
+				<hr />
+				<h5>Przeznaczenie</h5>
+				<p>
+					Wzorzec ten nie naruszaj¹c kapsu³kowania, zapamiêtuje i udostêpnia na zewn¹trz stan wewnêtrzny obiektu, 
+					tak ¿e obiekt mo¿e byæ póŸniej przywrócony do zapamiêtanego stanu.
+				</p>
+				<h5>Kiedy stosowaæ</h5>
+				<ul class="browser-default">
+					<li>
+						Chcesz pamiêtaæ migawkê stanu obiektu, tak by mo¿na go by³o potem przywróciæ do tego stanu.
+					</li>
+					<li>
+						Bezpoœredni interfejs do uzyskania stanu ujawnia³by szczegó³y implementacji i narusza³ hermetyzacjê obiektu.
+					</li>
+				</ul>
+				<h5>Struktura</h5>
+				<img src="/images/memento.png" alt="memento.png" title="Pami¹tka" />
+				<h5>Uczestnicy</h5>
+				<ul class="browser-default">
+					<li>
+						Pami¹tka
+						<ul class="browser-default">
+							<li>
+								Przechowuje stan wewnêtrzny obiektu ¯ród³o - i to tak¹ jego czêœæ, jaka wed³ug Ÿród³a powinna byæ przechowana.
+							</li>
+							<li>
+								Chroni stan przed dostêpem ze strony innych obiektów ni¿ Ÿród³o.
+								Pami¹tki maj¹ faktycznie dwa interfejsy. 
+								Opiekun widzi zawê¿ony interfejs pami¹tki - mo¿e jednak przekazaæ pami¹tkê innym obiektom.
+								¯ród³o natomiast widzi szeroko zakrojony interfejs, który umo¿liwia mu uzyskanie dostêpu do wszystkich danych niezbêdnych do otworzenia swojego poprzedniego stanu.
+								Najlepiej by³oby, gdyby tylko to Ÿród³o, które wytworzy³o pami¹tkê, mia³o dostêp do jej stanu wewnêtrznego.
+							</li>
+						</ul>
+					</li>
+					<li>
+						¯ród³o
+						<ul class="browser-default">
+							<li>
+								Tworzy pami¹tkê zawieraj¹c¹ migawkê swojego bie¿¹cego stanu wewnêtrznego.
+							</li>
+							<li>
+								Wykorzystuje pami¹tkê do odtworzenia swojego stanu wewnêtrznego.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Opiekun
+						<ul class="browser-default">
+							<li>
+								Jest odpowiedzialny za opiekê nad pami¹tk¹.
+							</li>
+							<li>
+								Nigdy nie wykonuje operacji na pami¹tce ani nie bada jej zawartoœci.
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<h5>Przyk³ad</h5>
+				Dostêpny pod adresem: <a href="https://github.com/SharpShooter17/">https://github.com/SharpShooter17/</a>
+			</div>
+		</div>
+	</body>
+</html>
